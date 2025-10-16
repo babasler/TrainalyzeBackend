@@ -19,7 +19,7 @@ public class Training {
 
     private String trainingName;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BaseSection> sections;
+    private final List<BaseSection> sections;
 
 
     public Training() {

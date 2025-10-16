@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: trn-test-mysql
+    restart: unless-stopped
+    shm_size: '256mb'
+    volumes:
+      - /Users/bastianbasler/mysql2:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    networks:
+      - trn-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+
+  backend:
+    build: ./backend
+    container_name: trn-test-backend
+    image: trn-test-backend:latest
+    ports:
+      - "8084:8084"
+    networks:
+      - trn-net
+    depends_on:
+      mysql:
+        condition: service_healthy
+networks:
+  trn-net:
+    name: trn-net
+    driver: bridge
+
+volumes:
+  db_data:
+    name: db_data
