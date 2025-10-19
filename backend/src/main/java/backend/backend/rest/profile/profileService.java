@@ -39,6 +39,9 @@ public class profileService {
       existing.setWorkoutSelection(profile.getWorkoutSelection());
       existing.setSelectedTrainingsplan(profile.getSelectedTrainingsplan());
       existing.setHandleMissingWorkout(profile.getHandleMissingWorkout());
+      existing.setBodyHeight(profile.getBodyHeight());
+      existing.setBodyWeight(profile.getBodyWeight());
+      existing.setBmi(calculateBmi(profile.getBodyWeight(), profile.getBodyHeight()));
 
       // save the updated profile
       profileRepository.save(existing);
@@ -73,5 +76,12 @@ public class profileService {
 
   public boolean profileExists(String username) {
     return profileRepository.existsByUsername(username);
+  }
+
+  private float calculateBmi(float weight, float height) {
+    if (height <= 0) {
+      throw new IllegalArgumentException("Height must be greater than zero");
+    }
+    return weight / ((height / 100) * (height / 100));
   }
 }

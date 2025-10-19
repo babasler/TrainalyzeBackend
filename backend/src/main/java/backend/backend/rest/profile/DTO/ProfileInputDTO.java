@@ -1,30 +1,11 @@
-package backend.backend.rest.profile;
+package backend.backend.rest.profile.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import backend.backend.rest.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profile {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
-
+public class ProfileInputDTO {
     private String username;
     private String weightIncreaseType;
     private float increaseWeight;
@@ -34,49 +15,6 @@ public class Profile {
     private String handleMissingWorkout;
     private float bodyHeight;
     private float bodyWeight;
-    private float bmi;
-
-    public Profile(User user, String username) {
-        this.username = username;
-        this.user = user;
-        this.weightIncreaseType = "";
-        this.increaseWeight = 0.0f;
-        this.increaseAtReps = 0;
-        this.workoutSelection = "";
-        this.selectedTrainingsplan = "";
-        this.handleMissingWorkout = "";
-        this.bodyHeight = 0.0f;
-        this.bodyWeight = 0.0f;
-        this.bmi = 0.0f;
-    }
-
-    /**
-     * @return Long return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return User return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     /**
      * @return String return the username
@@ -176,27 +114,31 @@ public class Profile {
         this.handleMissingWorkout = handleMissingWorkout;
     }
 
+    /**
+     * @return float return the bodyHeight
+     */
     public float getBodyHeight() {
         return bodyHeight;
     }
 
+    /**
+     * @param bodyHeight the bodyHeight to set
+     */
     public void setBodyHeight(float bodyHeight) {
         this.bodyHeight = bodyHeight;
     }
 
+    /**
+     * @return float return the bodyWeight
+     */
     public float getBodyWeight() {
         return bodyWeight;
     }
 
+    /**
+     * @param bodyWeight the bodyWeight to set
+     */
     public void setBodyWeight(float bodyWeight) {
         this.bodyWeight = bodyWeight;
-    }
-
-    public float getBmi() {
-        return bmi;
-    }
-
-    public void setBmi(float bmi) {
-        this.bmi = bmi;
     }
 }
