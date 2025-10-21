@@ -1,5 +1,6 @@
 package backend.backend.rest.profile;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -7,14 +8,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import backend.backend.rest.profile.bodyweight.BodyWeight;
+import backend.backend.rest.profile.bodyweight.BodyWeightService;
 import backend.backend.rest.user.User;
 import lombok.NonNull;
 
 @Service
 public class profileService {
   private final Logger logger = LoggerFactory.getLogger(profileService.class);
+  
   @Autowired
   private profileRepository profileRepository;
+  
+  @Autowired
+  private BodyWeightService bodyWeightService;
 
   public void createProfile(@NonNull User user, @NonNull String username) {
     if (profileRepository.existsByUsername(username)) {
@@ -31,6 +38,11 @@ public class profileService {
     logger.info("Found Profile: {}", existingProfile);
     if(existingProfile.isPresent()) {
       Profile existing = existingProfile.get();
+      
+      // Prüfe ob sich das Körpergewicht geändert hat
+      boolean bodyWeightChanged = existing.getBodyWeight() != profile.getBodyWeight() 
+                                  && profile.getBodyWeight() > 0;
+      
       // update the fields
       existing.setUsername(profile.getUsername());
       existing.setWeightIncreaseType(profile.getWeightIncreaseType());
@@ -45,6 +57,12 @@ public class profileService {
 
       // save the updated profile
       profileRepository.save(existing);
+      
+      // Wenn sich das Körpergewicht geändert hat, speichere einen neuen BodyWeight Eintrag
+      if (bodyWeightChanged) {
+        bodyWeightService.saveBodyWeightForProfile(existing, profile.getBodyWeight(), new Date());
+        logger.info("Saved new BodyWeight entry for profile: {}", existing.getUsername());
+      }
     } else {
       logger.warn("Profile with ID {} not found", profile.getId());
       throw new RuntimeException("Profile not found");
@@ -77,6 +95,32 @@ public class profileService {
   public boolean profileExists(String username) {
     return profileRepository.existsByUsername(username);
   }
+  
+  /**
+   * Holt das aktuelle BodyWeight eines Profils
+   */
+  public BodyWeight getCurrentBodyWeight(String username) {
+    Profile profile = getProfile(username);
+    if (profile != null) {
+      return bodyWeightService.getCurrentBodyWeightForProfile(profile);
+    }
+    return null;
+  }
+  
+  /**
+   * Aktualisiert nur die bodyWeight und BMI Felder ohne ein neues BodyWeight Entry zu erstellen
+   * (z.B. wenn manuell ein BodyWeight hinzugefügt wurde)
+   */
+  public void updateBodyWeightFieldsOnly(@NonNull Profile profile) {
+    Optional<Profile> existingProfile = profileRepository.findById(profile.getId());
+    if(existingProfile.isPresent()) {
+      Profile existing = existingProfile.get();
+      existing.setBodyWeight(profile.getBodyWeight());
+      existing.setBmi(profile.getBmi());
+      profileRepository.save(existing);
+      logger.info("Updated bodyWeight fields for profile: {}", existing.getUsername());
+    }
+  }
 
   private float calculateBmi(float weight, float height) {
     if (height <= 0) {
@@ -84,4 +128,5 @@ public class profileService {
     }
     return weight / ((height / 100) * (height / 100));
   }
+
 }

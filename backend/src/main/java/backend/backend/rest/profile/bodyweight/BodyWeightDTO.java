@@ -1,5 +1,7 @@
 package backend.backend.rest.profile.bodyweight;
 
+
+
 public class BodyWeightDTO {
     private float bodyWeight;
     private String date;
