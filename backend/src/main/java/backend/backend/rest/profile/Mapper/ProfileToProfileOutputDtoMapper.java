@@ -14,7 +14,6 @@ public class ProfileToProfileOutputDtoMapper {
         dto.setSelectedTrainingsplan(profile.getSelectedTrainingsplan());
         dto.setHandleMissingWorkout(profile.getHandleMissingWorkout());
         dto.setBodyHeight(profile.getBodyHeight());
-        dto.setBodyWeight(profile.getBodyWeight());
         dto.setBmi(profile.getBmi());
         return dto;
     }

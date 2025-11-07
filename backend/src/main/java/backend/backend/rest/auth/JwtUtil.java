@@ -23,9 +23,10 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(CustomUserDetails userDetails) {
         return Jwts.builder()
             .setSubject(userDetails.getUsername())
+            .claim("profile_id", userDetails.getProfileId())
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10h
             .signWith(getSigningKey()) 

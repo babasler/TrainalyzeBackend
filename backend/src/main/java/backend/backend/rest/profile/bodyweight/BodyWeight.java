@@ -22,7 +22,7 @@ public class BodyWeight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private float bodyWeight;
+    private float weight;
     private Date date;
     
     @ManyToOne
@@ -30,8 +30,8 @@ public class BodyWeight {
     @JsonIgnore
     private Profile profile;
 
-    public float getBodyWeight() {
-        return bodyWeight;
+    public float getWeight() {
+        return weight;
     }
 
     public Date getDate() {
@@ -42,8 +42,8 @@ public class BodyWeight {
         this.date = date;
     }
     
-    public void setBodyWeight(float bodyWeight) {
-        this.bodyWeight = bodyWeight;
+    public void setWeight(float bodyWeight) {
+        this.weight = bodyWeight;
     }
 
     public Long getId() {

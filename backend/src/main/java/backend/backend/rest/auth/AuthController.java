@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +27,11 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-    logger.info("Login attempt for user: {} with pin: {}", request.getUsername(), request.getPin());
+    logger.info("Login attempt for user: {}", request.getUsername());
     try {
       Authentication auth = authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPin()));
-      UserDetails user = (UserDetails) auth.getPrincipal();
+      CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
       String token = jwtUtil.generateToken(user);
       logger.info("Login successful for user: {}", request.getUsername());
       return ResponseEntity.ok(new AuthResponse(token));

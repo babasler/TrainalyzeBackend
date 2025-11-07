@@ -24,7 +24,7 @@ public class BodyWeightService {
     public BodyWeight saveBodyWeightForProfile(Profile profile, float weight, Date date) {
         BodyWeight bodyWeight = new BodyWeight();
         bodyWeight.setProfile(profile);
-        bodyWeight.setBodyWeight(weight);
+        bodyWeight.setWeight(weight);
         bodyWeight.setDate(date);
         return bodyWeightRepository.save(bodyWeight);
     }
