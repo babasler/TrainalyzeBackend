@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfileInputDTO {
-    private String username;
+    private Long profileId;
     private String weightIncreaseType;
     private float increaseWeight;
     private int increaseAtReps;
@@ -14,20 +14,19 @@ public class ProfileInputDTO {
     private String selectedTrainingsplan;
     private String handleMissingWorkout;
     private float bodyHeight;
-    private float bodyWeight;
 
     /**
-     * @return String return the username
+     * @return Long return the profileId
      */
-    public String getUsername() {
-        return username;
+    public Long getProfileId() {
+        return profileId;
     }
 
     /**
-     * @param username the username to set
+     * @param profileId the profileId to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
     }
 
     /**
@@ -126,19 +125,5 @@ public class ProfileInputDTO {
      */
     public void setBodyHeight(float bodyHeight) {
         this.bodyHeight = bodyHeight;
-    }
-
-    /**
-     * @return float return the bodyWeight
-     */
-    public float getBodyWeight() {
-        return bodyWeight;
-    }
-
-    /**
-     * @param bodyWeight the bodyWeight to set
-     */
-    public void setBodyWeight(float bodyWeight) {
-        this.bodyWeight = bodyWeight;
     }
 }

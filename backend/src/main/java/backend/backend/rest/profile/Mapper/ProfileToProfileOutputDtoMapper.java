@@ -6,7 +6,7 @@ import backend.backend.rest.profile.DTO.ProfileOutputDTO;
 public class ProfileToProfileOutputDtoMapper {
     public static ProfileOutputDTO map(Profile profile) {
         ProfileOutputDTO dto = new ProfileOutputDTO();
-        dto.setUsername(profile.getUsername());
+        dto.setProfileId(profile.getId());
         dto.setWeightIncreaseType(profile.getWeightIncreaseType());
         dto.setIncreaseWeight(profile.getIncreaseWeight());
         dto.setIncreaseAtReps(profile.getIncreaseAtReps());

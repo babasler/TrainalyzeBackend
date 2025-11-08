@@ -1,7 +1,7 @@
 package backend.backend.rest.profile.DTO;
 
 public class ProfileOutputDTO {
-    private String username;
+    private Long profileId;
     private String weightIncreaseType;
     private float increaseWeight;
     private int increaseAtReps;
@@ -14,17 +14,17 @@ public class ProfileOutputDTO {
 
 
     /**
-     * @return String return the username
+     * @return Long return the profileId
      */
-    public String getUsername() {
-        return username;
+    public Long getProfileId() {
+        return profileId;
     }
 
     /**
-     * @param username the username to set
+     * @param profileId the profileId to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
     }
 
     /**
