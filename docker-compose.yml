@@ -20,8 +20,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-
-
   backend:
     build: ./backend
     container_name: trn-test-backend

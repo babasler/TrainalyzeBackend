@@ -1,5 +1,6 @@
 package backend.backend.rest.profile;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public class profileService {
     if (profile != null) {
       return bodyWeightService.getCurrentBodyWeightForProfile(profile);
     }
-    return null;
+    return new BodyWeight(-1L, 0.0f, new Date(), profile);
   }
   
 

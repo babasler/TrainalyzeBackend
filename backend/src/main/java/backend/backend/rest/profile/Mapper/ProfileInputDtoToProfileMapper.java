@@ -7,6 +7,7 @@ import backend.backend.rest.profile.DTO.ProfileInputDTO;
 public class ProfileInputDtoToProfileMapper {
     public static Profile map(ProfileInputDTO dto) {
         Profile profile = new Profile();
+        profile.setId(dto.getProfileId());
         profile.setWeightIncreaseType(dto.getWeightIncreaseType());
         profile.setIncreaseWeight(dto.getIncreaseWeight());
         profile.setIncreaseAtReps(dto.getIncreaseAtReps());

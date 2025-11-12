@@ -102,9 +102,9 @@ public class profileController {
         
         if (currentBodyWeight != null) {
             BodyWeightDTO bodyWeightDTO = new BodyWeightDTO();
-            bodyWeightDTO.setBodyWeight(currentBodyWeight.getWeight());
+            bodyWeightDTO.setWeight(currentBodyWeight.getWeight());
             bodyWeightDTO.setDate(currentBodyWeight.getDate().toString());
-            logger.info("Current body weight: {}, Date: {}", bodyWeightDTO.getBodyWeight(), bodyWeightDTO.getDate());
+            logger.info("Current body weight: {}, Date: {}", bodyWeightDTO.getWeight(), bodyWeightDTO.getDate());
             return ResponseEntity.ok(bodyWeightDTO);
         } else {
             logger.warn("No body weight records found for profile ID: {}", profileId);
@@ -132,7 +132,7 @@ public class profileController {
         
         for (BodyWeight bodyWeight : bodyWeightHistory) {
             BodyWeightDTO dto = new BodyWeightDTO();
-            dto.setBodyWeight(bodyWeight.getWeight());
+            dto.setWeight(bodyWeight.getWeight());
             dto.setDate(bodyWeight.getDate().toString());
             bodyWeightDTOs.add(dto);
         }
@@ -145,7 +145,7 @@ public class profileController {
     public ResponseEntity<Map<String, String>> addBodyWeight(
             Authentication authentication,
             @RequestBody BodyWeightDTO bodyWeightDTO) {
-        logger.info("Adding body weight entry: {}", bodyWeightDTO);
+        logger.info("Adding body weight entry: {}", bodyWeightDTO.getWeight());
         
         // Hole Profile-ID direkt aus CustomUserDetails
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
@@ -159,8 +159,8 @@ public class profileController {
         }
         
         try {
-            java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(bodyWeightDTO.getDate());
-            bodyWeightService.saveBodyWeightForProfile(profile, bodyWeightDTO.getBodyWeight(), date);
+            java.util.Date date = new java.text.SimpleDateFormat("dd.MM.yyyy").parse(bodyWeightDTO.getDate());
+            bodyWeightService.saveBodyWeightForProfile(profile, bodyWeightDTO.getWeight(), date);
             
             logger.info("Body weight entry added successfully for profile ID: {}", profileId);
             return ResponseEntity.ok(Map.of("message", "Body weight added successfully"));

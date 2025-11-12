@@ -3,11 +3,11 @@ package backend.backend.rest.profile.bodyweight;
 
 
 public class BodyWeightDTO {
-    private float bodyWeight;
+    private float weight;
     private String date;
 
-    public float getBodyWeight() {
-        return bodyWeight;
+    public float getWeight() {
+        return weight;
     }
 
     public String getDate() {
@@ -16,7 +16,7 @@ public class BodyWeightDTO {
     public void setDate(String date) {
         this.date = date;
     }
-    public void setBodyWeight(float bodyWeight) {
-        this.bodyWeight = bodyWeight;
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 }
