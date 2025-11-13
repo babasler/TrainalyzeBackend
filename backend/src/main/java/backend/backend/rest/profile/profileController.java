@@ -33,11 +33,13 @@ public class profileController {
     private final UserService userService;
     private final BodyWeightService bodyWeightService;
     private final Logger logger = LoggerFactory.getLogger(profileController.class);
+    private final ProfileToProfileOutputDtoMapper profileToProfileOutputDtoMapper;
 
-    public profileController(profileService profileService, UserService userService, BodyWeightService bodyWeightService) {
+    public profileController(profileService profileService, UserService userService, BodyWeightService bodyWeightService, ProfileToProfileOutputDtoMapper profileToProfileOutputDtoMapper) {
         this.profileService = profileService;
         this.userService = userService;
         this.bodyWeightService = bodyWeightService;
+        this.profileToProfileOutputDtoMapper = profileToProfileOutputDtoMapper;
     }
 
     @GetMapping("/current")
@@ -49,11 +51,11 @@ public class profileController {
         
         Profile profile = profileService.getProfile(profileId);
         if (profile != null) {
-            logger.info("Current profile: {}, {}, {}, {}, {}, {}, {}, {},", profile.getUsername(),profile.getWeightIncreaseType(),
+            logger.info("Current profile: {}, {}, {}, {}, {}, {}, {}, {},", profile.getUser().getUsername(),profile.getWeightIncreaseType(),
                     profile.getIncreaseWeight(), profile.getIncreaseAtReps(), profile.getWorkoutSelection(),
                     profile.getSelectedTrainingsplan(), profile.getHandleMissingWorkout(), profile.getBodyHeight(),
                     profile.getBmi());
-            return ResponseEntity.ok(ProfileToProfileOutputDtoMapper.map(profile));
+            return ResponseEntity.ok(profileToProfileOutputDtoMapper.map(profile));
         } else {
             logger.warn("No profile found");
             return ResponseEntity.notFound().build();

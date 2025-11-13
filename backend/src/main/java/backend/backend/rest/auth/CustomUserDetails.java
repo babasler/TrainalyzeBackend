@@ -19,6 +19,9 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public Long getProfileId() {
+        if (user.getProfile() == null) {
+            return null; // oder throw new RuntimeException("User has no profile");
+        }
         return user.getProfile().getId();
     }
 

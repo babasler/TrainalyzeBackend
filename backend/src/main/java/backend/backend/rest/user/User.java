@@ -26,7 +26,7 @@ public class User {
     
     
     // One-to-One Relationship
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = jakarta.persistence.FetchType.EAGER)
     private Profile profile;
     
     public User() {}

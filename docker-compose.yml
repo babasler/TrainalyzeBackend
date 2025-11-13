@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     shm_size: '256mb'
     volumes:
-      - /Users/bastianbasler/mysql2:/var/lib/mysql
+      - /Users/bastianbasler/mysql3:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: mydatabase

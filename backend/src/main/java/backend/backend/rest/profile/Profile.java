@@ -25,21 +25,17 @@ public class Profile {
     @JsonIgnore
     private User user;
 
-    //private String username;
     private String weightIncreaseType;
     private float increaseWeight;
     private int increaseAtReps;
     private String workoutSelection;
-    //TODO: Change to Reference to Trainingsplan Entity
     private String selectedTrainingsplan;
     private String handleMissingWorkout;
     private float bodyHeight;
-    //brauche ich hier nicht
-    //private float bodyWeight;
+    private float bodyWeight;
     private float bmi;
 
     public Profile(User user, String username) {
-        //this.username = username;
         this.user = user;
         this.weightIncreaseType = "";
         this.increaseWeight = 0.0f;
@@ -48,6 +44,7 @@ public class Profile {
         this.selectedTrainingsplan = "";
         this.handleMissingWorkout = "";
         this.bodyHeight = 0.0f;
+        this.bodyWeight = 0.0f;
         this.bmi = 0.0f;
     }
 
@@ -77,13 +74,6 @@ public class Profile {
      */
     public void setUser(User user) {
         this.user = user;
-    }
-
-    /**
-     * @return String return the username
-     */
-    public String getUsername() {
-        return this.user.getUsername();
     }
 
     /**
@@ -176,6 +166,14 @@ public class Profile {
 
     public void setBodyHeight(float bodyHeight) {
         this.bodyHeight = bodyHeight;
+    }
+
+    public float getBodyWeight() {
+        return bodyWeight;
+    }
+
+    public void setBodyWeight(float bodyWeight) {
+        this.bodyWeight = bodyWeight;
     }
 
     public float getBmi() {

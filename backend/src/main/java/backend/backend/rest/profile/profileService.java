@@ -24,11 +24,18 @@ public class profileService {
   private BodyWeightService bodyWeightService;
 
   public void createProfile(@NonNull User user, @NonNull String username) {
-    if (profileRepository.findById(user.getProfile().getId()).isPresent()) {
-      logger.info("Profile with user ID {} already exists", user.getProfile().getId());
-      throw new RuntimeException("Profile with this user ID already exists");
+    // Prüfe ob der User bereits ein Profil hat
+    if (user.getProfile() != null) {
+      logger.info("Profile for user {} already exists", username);
+      throw new RuntimeException("Profile for this user already exists");
     }
-    profileRepository.save(new Profile(user, username));
+    
+    Profile newProfile = new Profile(user, username);
+    Profile savedProfile = profileRepository.save(newProfile);
+    
+    // Wichtig: Setze das Profile auch in der User-Entity (bidirektionale Beziehung)
+    user.setProfile(savedProfile);
+    
     logger.info("Profile created: {}", username);
   }
 
@@ -53,11 +60,11 @@ public class profileService {
       // save the updated profile
       profileRepository.save(existing);
       
+      logger.info("Profile updated for user: {}", existing.getUser().getUsername());
     } else {
       logger.warn("Profile with ID {} not found", profile.getId());
       throw new RuntimeException("Profile not found");
     }
-    logger.info("Profile updated: {}", profile.getUsername());
   }
 
   public Profile getProfile(Long profileId) {
