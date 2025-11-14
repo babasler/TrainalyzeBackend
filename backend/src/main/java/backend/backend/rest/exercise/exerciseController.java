@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import backend.backend.rest.exercise.DTO.ExerciseDTO;
+import backend.backend.rest.exercise.Mapper.ExerciseDtoToExerciseMapper;
+
 @RestController
 @RequestMapping("/trainalyze/exercise")
 public class exerciseController {
@@ -24,10 +27,10 @@ public class exerciseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createExercise(@RequestBody Exercise exercise) {
-        logger.info("Received exercise: {}", exercise);
-        exerciseService.createExercise(exercise);
-        logger.info("Exercise saved successfully: {}", exercise.getName());
+    public ResponseEntity<?> createExercise(@RequestBody ExerciseDTO exerciseDto) {
+        logger.info("Received exercise: {}", exerciseDto.getName());
+        exerciseService.createExercise(ExerciseDtoToExerciseMapper.map(exerciseDto));
+        logger.info("Exercise saved successfully: {}", exerciseDto.getName());
         return ResponseEntity.ok(Collections.singletonMap("message", "Exercise created successfully"));
     }
 
