@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import backend.backend.rest.profile.bodyweight.BodyWeight;
 import backend.backend.rest.profile.bodyweight.BodyWeightService;
 import backend.backend.rest.user.User;
+import backend.backend.rest.user.UserService;
 import lombok.NonNull;
 
 @Service
@@ -22,6 +23,9 @@ public class profileService {
   
   @Autowired
   private BodyWeightService bodyWeightService;
+  
+  @Autowired
+  private UserService userService;
 
   public void createProfile(@NonNull User user, @NonNull String username) {
     // Prüfe ob der User bereits ein Profil hat
@@ -33,8 +37,9 @@ public class profileService {
     Profile newProfile = new Profile(user, username);
     Profile savedProfile = profileRepository.save(newProfile);
     
-    // Wichtig: Setze das Profile auch in der User-Entity (bidirektionale Beziehung)
+    // Wichtig: Setze das Profile auch in der User-Entity und speichere den User (bidirektionale Beziehung)
     user.setProfile(savedProfile);
+    userService.updateUser(user);
     
     logger.info("Profile created: {}", username);
   }

@@ -47,6 +47,28 @@ public class profileController {
         logger.info("Fetching current profile");
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Long profileId = userDetails.getProfileId();
+        
+        if (profileId == null) {
+            // Fallback: User hat kein Profil, erstelle eins automatisch
+            logger.warn("User {} has no profile, creating one automatically", userDetails.getUsername());
+            try {
+                User user = userService.findByUsername(userDetails.getUsername());
+                if (user != null) {
+                    profileService.createProfile(user, userDetails.getUsername());
+                    // User neu laden um Profile-ID zu bekommen
+                    user = userService.findByUsername(userDetails.getUsername());
+                    profileId = user.getProfile().getId();
+                    logger.info("Profile created automatically for user {}", userDetails.getUsername());
+                } else {
+                    logger.error("User not found: {}", userDetails.getUsername());
+                    return ResponseEntity.notFound().build();
+                }
+            } catch (Exception e) {
+                logger.error("Failed to auto-create profile: {}", e.getMessage());
+                return ResponseEntity.notFound().build();
+            }
+        }
+        
         logger.info("Authenticated user profile ID: {}", profileId);
         
         Profile profile = profileService.getProfile(profileId);

@@ -21,6 +21,13 @@ public class UserService {
             User user = new User(username, encodedPin);
             return userRepository.save(user);
         }
-
+    }
+    
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+    
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
 }
