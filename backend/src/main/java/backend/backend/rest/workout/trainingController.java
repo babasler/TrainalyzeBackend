@@ -1,4 +1,4 @@
-package backend.backend.rest.training;
+package backend.backend.rest.workout;
 
 import java.util.List;
 import java.util.Map;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import backend.backend.rest.training.section.BaseSection;
+import backend.backend.rest.workout.section.BaseSection;
 
 
 @RestController
-@RequestMapping("/trainalyze/training")
+@RequestMapping("/trainalyze/workout")
 public class trainingController {
     private final trainingService trainingService;
     private final Logger logger = LoggerFactory.getLogger(trainingController.class);
@@ -26,7 +26,7 @@ public class trainingController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Map<String, String>> createTraining(@RequestBody Training training) {
+    public ResponseEntity<Map<String, String>> createTraining(@RequestBody Workout training) {
         for (BaseSection section : training.getSections()) {
             logger.info("Section: " + section.getClass().getSimpleName());
         }
@@ -34,16 +34,16 @@ public class trainingController {
     }
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Training>> getAllTraining() {
+    public ResponseEntity<List<Workout>> getAllTraining() {
         logger.info("Fetching all trainings");
-        List<Training> trainings = trainingService.getAllTrainings();
+        List<Workout> trainings = trainingService.getAllTrainings();
         trainings.forEach(training -> logger.info("Training: {}", training));
         return ResponseEntity.ok(trainings);
     }
 
     @GetMapping("/get/names")
     public ResponseEntity<Map<String,List<String>>> getAllTrainingNames() {
-        return ResponseEntity.ok(Map.of("trainingNames", trainingService.getAllTrainings().stream().map(Training::getTrainingName).toList()));
+        return ResponseEntity.ok(Map.of("trainingNames", trainingService.getAllTrainings().stream().map(Workout::getWorkoutName).toList()));
     }
     
 }

@@ -1,9 +1,9 @@
-package backend.backend.rest.training;
+package backend.backend.rest.workout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import backend.backend.rest.training.section.BaseSection;
+import backend.backend.rest.workout.section.BaseSection;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,31 +12,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Training {
+public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String trainingName;
+    private String workoutName;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<BaseSection> sections;
 
 
-    public Training() {
+    public Workout() {
         this.sections = new ArrayList<>();
     }
 
-    public Training(String trainingName) {
-        this.trainingName = trainingName;
+    public Workout(String trainingName) {
+        this.workoutName = trainingName;
         this.sections = new ArrayList<>();
     }
 
-    public String getTrainingName() {
-        return this.trainingName;
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTrainingName(String trainingName) {
-        this.trainingName = trainingName;
+    public String getWorkoutName() {
+        return this.workoutName;
+    }
+
+    public void setWorkoutName(String trainingName) {
+        this.workoutName = trainingName;
     }
 
     public List<BaseSection> getSections() {
@@ -59,7 +66,7 @@ public class Training {
     public String toString() {
         return "Training{" +
                 "id=" + id +
-                ", trainingName='" + trainingName + '\'' +
+                ", trainingName='" + workoutName + '\'' +
                 ", sections=" + sections +
                 '}';
     }

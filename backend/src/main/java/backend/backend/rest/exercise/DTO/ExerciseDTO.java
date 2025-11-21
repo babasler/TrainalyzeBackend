@@ -1,11 +1,13 @@
 package backend.backend.rest.exercise.DTO;
 
+import java.util.List;
+
 public class ExerciseDTO {
     private long id;
     private String name;
     private String type;
     private String motionSymmetry;
-    private java.util.List<String> muscleGroups;
+    private List<String> muscleGroups;
     private String equipment;
 
     public ExerciseDTO() {

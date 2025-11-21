@@ -1,4 +1,4 @@
-package backend.backend.rest.training.section;
+package backend.backend.rest.workout.section;
 
 import backend.backend.rest.exercise.Exercise;
 import jakarta.persistence.Entity;

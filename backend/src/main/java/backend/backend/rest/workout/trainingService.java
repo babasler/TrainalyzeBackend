@@ -1,4 +1,4 @@
-package backend.backend.rest.training;
+package backend.backend.rest.workout;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,25 +15,25 @@ public class trainingService {
     @Autowired
     private trainingRepository trainingRepository;
 
-    public String createTraining(Training training) {
+    public String createTraining(Workout training) {
         logger.info("Received training: {}", training);
         trainingRepository.save(training);
         return "Training created successfully";
     }
 
-    public Training getTrainingByName(String trainingName) {
+    public Workout getTrainingByName(String trainingName) {
         logger.info("Fetching training by name: {}", trainingName);
         return trainingRepository.findByTrainingName(trainingName).orElse(null);
     }
 
-    public List<Training> getAllTrainings() {
+    public List<Workout> getAllTrainings() {
         logger.info("Fetching all trainings");
         return trainingRepository.findAll();
     }
 
     public boolean trainingExists(String trainingName) {
         logger.info("Checking if training exists: {}", trainingName);
-        Optional<Training> training = trainingRepository.findByTrainingName(trainingName);
+        Optional<Workout> training = trainingRepository.findByTrainingName(trainingName);
         logger.info("Training exists: {}", training.isPresent());
         return training.isPresent();
     }
