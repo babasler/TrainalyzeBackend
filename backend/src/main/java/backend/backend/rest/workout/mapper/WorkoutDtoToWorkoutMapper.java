@@ -5,16 +5,18 @@ import java.util.List;
 
 import backend.backend.rest.workout.Workout;
 import backend.backend.rest.workout.DTO.BaseSectionDTO;
+import backend.backend.rest.workout.DTO.MobilitySectionDTO;
 import backend.backend.rest.workout.DTO.PauseSectionDTO;
+import backend.backend.rest.workout.DTO.WorkoutDTO;
 import backend.backend.rest.workout.section.BaseSection;
 import backend.backend.rest.workout.section.MobilitySection;
 import backend.backend.rest.workout.section.PauseSection;
 
 public class WorkoutDtoToWorkoutMapper {
-    public Workout map(Workout dto) {
+    public Workout map(WorkoutDTO dto) {
         Workout workout = new Workout();
         workout.setId(dto.getId());
-        workout.setWorkoutName(dto.getWorkoutName());
+        workout.setWorkoutName(dto.getName());
         workout.getSections().addAll(mapSections(dto.getSections()));
         return workout;
     }
