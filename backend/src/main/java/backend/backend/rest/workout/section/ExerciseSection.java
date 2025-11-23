@@ -21,6 +21,12 @@ public class ExerciseSection {
     public ExerciseSection() {
         // Default constructor
     }
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Exercise getExercise() {
         return this.exercise;

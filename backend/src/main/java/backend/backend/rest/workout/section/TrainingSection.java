@@ -24,6 +24,14 @@ public class TrainingSection extends BaseSection {
         exerciseSections = new ArrayList<>();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public List<ExerciseSection> getExerciseSections() {
         return exerciseSections;
     }
