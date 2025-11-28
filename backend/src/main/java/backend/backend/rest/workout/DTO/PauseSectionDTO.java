@@ -1,14 +1,14 @@
 package backend.backend.rest.workout.DTO;
 
 public class PauseSectionDTO extends BaseSectionDTO {
-    private float duration;
+    private String duration;
     private boolean isDurationPause;
 
-    public float getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 

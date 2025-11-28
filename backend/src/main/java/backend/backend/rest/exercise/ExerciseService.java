@@ -32,4 +32,9 @@ public class ExerciseService {
         logger.info("Fetching exercise by name: {}", name);
         return exerciseRepository.findByName(name);
     }
+
+    public Exercise getExerciseById(Long id) {
+        logger.info("Fetching exercise by ID: {}", id);
+        return exerciseRepository.findById(id).orElse(null);
+    }
 }

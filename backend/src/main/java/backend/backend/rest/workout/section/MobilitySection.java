@@ -17,6 +17,14 @@ public class MobilitySection extends BaseSection {
     private int sets;
     private int reps;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public MobilitySection() {
         super(SectionType.MOBILITY);
     }

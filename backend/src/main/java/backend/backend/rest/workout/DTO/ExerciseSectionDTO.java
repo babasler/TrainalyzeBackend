@@ -6,6 +6,7 @@ public class ExerciseSectionDTO {
     private int repetitions;
     private float weight;
     private Long exerciseId;
+    private PauseSectionDTO pauseSection;
 
     public Long getId() {
         return id;
@@ -45,5 +46,11 @@ public class ExerciseSectionDTO {
 
     public void setExerciseId(Long exerciseId) {
         this.exerciseId = exerciseId;
+    }
+    public PauseSectionDTO getPauseSection() {
+        return pauseSection;
+    }
+    public void setPauseSection(PauseSectionDTO pauseSection) {
+        this.pauseSection = pauseSection;
     }
 }

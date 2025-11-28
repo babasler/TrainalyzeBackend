@@ -45,4 +45,9 @@ public class WarumUpSection extends BaseSection {
     public void setDurationWarmUp(boolean durationWarmUp) {
         isDurationWarmUp = durationWarmUp;
     }
+
+    @Override
+    public String toString() {
+        return "WarumUpSection [duration=" + duration + ", isDurationWarmUp=" + isDurationWarmUp + "]";
+    }
 }

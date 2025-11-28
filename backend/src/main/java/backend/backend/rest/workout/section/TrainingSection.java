@@ -50,4 +50,5 @@ public class TrainingSection extends BaseSection {
         }
         return exerciseSections.get(index);
     }
+
 }

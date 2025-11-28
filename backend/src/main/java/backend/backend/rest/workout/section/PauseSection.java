@@ -35,4 +35,9 @@ public class PauseSection extends BaseSection {
         this.isDurationPause = isDurationPause;
     }
 
+    @Override
+    public String toString() {
+        return "PauseSection [duration=" + duration + ", isDurationPause=" + isDurationPause + "]";
+    }
+
 }

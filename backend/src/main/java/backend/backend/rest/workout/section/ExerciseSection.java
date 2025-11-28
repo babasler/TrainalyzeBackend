@@ -75,4 +75,10 @@ public class ExerciseSection {
         this.weight = weight;
         this.pauseAfterSet = pauseAfterSet;
     }
+
+    @Override
+    public String toString() {
+        return "ExerciseSection [id=" + id + ", exercise=" + exercise + ", sets=" + sets + ", reps=" + reps + ", weight=" + weight
+                + ", pauseAfterSet=" + pauseAfterSet.toString() + "]";
+    }
 }
