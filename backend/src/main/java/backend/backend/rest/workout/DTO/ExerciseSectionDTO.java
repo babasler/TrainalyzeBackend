@@ -2,6 +2,7 @@ package backend.backend.rest.workout.DTO;
 
 public class ExerciseSectionDTO {
     private Long id;
+    private String exerciseName;
     private int sets;
     private int repetitions;
     private float weight;
@@ -15,7 +16,12 @@ public class ExerciseSectionDTO {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public String getExerciseName() {
+        return exerciseName;
+    }
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
+    }
     public int getSets() {
         return sets;
     }
