@@ -16,8 +16,13 @@
         <relativePath/>
     </parent>
     
-    <dependencies>
-        <dependency>
+    <properties>
+        <!-- Ensure baseline builds use Java 17, compatible with Spring Boot 3.x -->
+        <java.version>21</java.version>
+    <properties>
+        <!-- Target Java version for upgrade -->
+        <java.version>21</java.version>
+    </properties>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
