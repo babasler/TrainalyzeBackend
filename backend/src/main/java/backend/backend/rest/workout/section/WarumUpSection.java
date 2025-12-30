@@ -1,5 +1,6 @@
 package backend.backend.rest.workout.section;
 
+import backend.backend.common.Util.Duration;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ public class WarumUpSection extends BaseSection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private float duration;
+    private Duration duration;
     private boolean isDurationWarmUp;
 
     public WarumUpSection() {
@@ -25,16 +26,16 @@ public class WarumUpSection extends BaseSection {
         this.id = id;
     }
 
-    public WarumUpSection(float duration, boolean isDurationWarmUp) {
+    public WarumUpSection(Duration duration, boolean isDurationWarmUp) {
         this.duration = duration;
         this.isDurationWarmUp = isDurationWarmUp;
     }
 
-    public float getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 

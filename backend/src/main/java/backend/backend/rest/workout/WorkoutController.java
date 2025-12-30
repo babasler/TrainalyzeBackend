@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import backend.backend.rest.workout.DTO.WorkoutDTO;
+import backend.backend.rest.workout.mapper.WorkoutDtoToWorkoutMapper;
 import backend.backend.rest.workout.section.BaseSection;
 
 
@@ -21,6 +23,8 @@ import backend.backend.rest.workout.section.BaseSection;
 public class WorkoutController {
     @Autowired
     private final WorkoutService workoutService;
+    @Autowired
+    private WorkoutDtoToWorkoutMapper workoutMapper;
     private final Logger logger = LoggerFactory.getLogger(WorkoutController.class);
 
     public WorkoutController(WorkoutService workoutService) {
@@ -28,9 +32,10 @@ public class WorkoutController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Map<String, String>> createTraining(@RequestBody Workout workout) {
+    public ResponseEntity<Map<String, String>> createTraining(@RequestBody WorkoutDTO workoutDto) {
+        Workout workout = workoutMapper.map(workoutDto);
         for (BaseSection section : workout.getSections()) {
-            logger.info("Section: " + section.getClass().getSimpleName());
+            logger.info("Section: {}", section.getClass().getSimpleName());
         }
         return ResponseEntity.ok(Map.of("message", workoutService.createTraining(workout)));
     }

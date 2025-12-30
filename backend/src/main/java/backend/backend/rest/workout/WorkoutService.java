@@ -23,7 +23,7 @@ public class WorkoutService {
 
     public Workout getWorkoutByName(String workoutName) {
         logger.info("Fetching workout by name: {}", workoutName);
-        return workoutRepository.findByTrainingName(workoutName).orElse(null);
+        return workoutRepository.findByWorkoutName(workoutName).orElse(null);
     }
 
     public List<Workout> getAllWorkouts() {
@@ -33,7 +33,7 @@ public class WorkoutService {
 
     public boolean workoutExists(String workoutName) {
         logger.info("Checking if workout exists: {}", workoutName);
-        Optional<Workout> workout = workoutRepository.findByTrainingName(workoutName);
+        Optional<Workout> workout = workoutRepository.findByWorkoutName(workoutName);
         logger.info("Workout exists: {}", workout.isPresent());
         return workout.isPresent();
     }

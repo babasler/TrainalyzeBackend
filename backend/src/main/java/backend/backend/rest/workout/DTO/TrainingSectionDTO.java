@@ -2,7 +2,7 @@ package backend.backend.rest.workout.DTO;
 
 import java.util.List;
 
-public class TrainingSectionDTO {
+public class TrainingSectionDTO extends BaseSectionDTO {
     private Long id;
     private List<ExerciseSectionDTO> exerciseSections;
 
