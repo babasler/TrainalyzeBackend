@@ -2,14 +2,14 @@ package backend.backend.rest.exercise.persistence;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
@@ -17,8 +17,8 @@ import lombok.Setter;
 @Setter
 public class ExerciseEntity {
     @Id
-    @NonNull
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     @Column(nullable = false, name = "exercise_name")
     private String name;
     @ElementCollection
@@ -33,15 +33,18 @@ public class ExerciseEntity {
     @Column(nullable = false, name = "updated_at")
     private Instant updatedAt;
 
-    private ExerciseEntity(UUID id, String name, List<String> muscles, float weight, int repetitions) {
-        this.id = id;
+    protected ExerciseEntity() {}
+
+    private ExerciseEntity(String name, List<String> muscles, float weight, int repetitions) {
         this.name = name;
         this.muscles = muscles;
         this.weight = weight;
         this.repetitions = repetitions;
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 
     public static ExerciseEntity of(String name, List<String> muscles, float weight, int repetitions) {
-        return new ExerciseEntity(UUID.randomUUID(), name, muscles, weight, repetitions);
+        return new ExerciseEntity(name, muscles, weight, repetitions);
     }
 }
