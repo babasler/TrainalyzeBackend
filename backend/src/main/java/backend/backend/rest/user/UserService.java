@@ -1,6 +1,8 @@
 package backend.backend.rest.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,10 @@ public class UserService {
     
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+
+     public String getCurrentUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth != null ? auth.getName() : null;
     }
 }

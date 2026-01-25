@@ -12,4 +12,5 @@ public class ExerciseView {
     private String name;
     private float weight;
     private int repetitions;
+    private String[] muscleGroups;
 }

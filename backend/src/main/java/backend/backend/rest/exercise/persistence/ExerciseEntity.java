@@ -1,7 +1,6 @@
 package backend.backend.rest.exercise.persistence;
 
 import java.time.Instant;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -9,6 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.FetchType;
+import backend.backend.rest.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +26,7 @@ public class ExerciseEntity {
     private String name;
     @ElementCollection
     @Column(nullable = false, name = "muscle_groups")
-    private List<String> muscles;
+    private String[] muscles;
     @Column(nullable = false, name = "max_exercise_weight")
     private float weight;
     @Column(nullable = false, name = "max_exercise_repetitions")
@@ -33,9 +36,13 @@ public class ExerciseEntity {
     @Column(nullable = false, name = "updated_at")
     private Instant updatedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     protected ExerciseEntity() {}
 
-    private ExerciseEntity(String name, List<String> muscles, float weight, int repetitions) {
+    private ExerciseEntity(String name, String[] muscles, float weight, int repetitions) {
         this.name = name;
         this.muscles = muscles;
         this.weight = weight;
@@ -44,7 +51,11 @@ public class ExerciseEntity {
         this.updatedAt = Instant.now();
     }
 
-    public static ExerciseEntity of(String name, List<String> muscles, float weight, int repetitions) {
+    public static ExerciseEntity of(String name, String[] muscles, float weight, int repetitions) {
         return new ExerciseEntity(name, muscles, weight, repetitions);
+    }
+
+    public void touchUpdatedAt() {
+        this.updatedAt = Instant.now();
     }
 }

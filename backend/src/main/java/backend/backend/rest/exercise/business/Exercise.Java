@@ -1,7 +1,5 @@
 package backend.backend.rest.exercise.business;
 
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +8,7 @@ import lombok.Setter;
 public class Exercise {
     private Long id;
     private String name;
-    private List<String> muscles;
+    private String[] muscles;
     private float weight;
     private int repetitions;
 }
