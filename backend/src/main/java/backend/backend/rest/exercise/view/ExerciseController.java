@@ -64,6 +64,7 @@ public class ExerciseController {
     public ExerciseView updateExercise(@RequestBody ExerciseUpdateRequest request) {
         ExerciseUpdateRequestToExerciseMapper toBiz = new ExerciseUpdateRequestToExerciseMapper();
         Exercise ex = toBiz.dtoToBusiness(request);
+        //Hier muss das richtige Entity geholt und geupdated werden.
         logger.info("Updating exercise id {}: {}, {}, {}", ex.getId(), ex.getName(), ex.getWeight(), ex.getRepetitions());
         Exercise updated = exerciseService.updateExerciseForCurrentUser(ex);
         ExerciseToExerciseViewMapper toView = new ExerciseToExerciseViewMapper();
