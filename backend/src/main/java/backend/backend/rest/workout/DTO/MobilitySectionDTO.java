@@ -1,6 +1,6 @@
 package backend.backend.rest.workout.DTO;
 
-public class MobilitySectionDTO {
+public class MobilitySectionDTO extends BaseSectionDTO {
     private Long id;
     private long mobilityExerciseId;
     private int sets;

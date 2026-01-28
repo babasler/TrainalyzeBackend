@@ -39,7 +39,7 @@ public class Duration {
 
     @Override
     public String toString() {
-        return String.format("%02d:%02d", minutes, seconds);
+        return "%02d:%02d".formatted(minutes, seconds);
     }
 
 

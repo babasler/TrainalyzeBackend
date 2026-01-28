@@ -2,7 +2,7 @@ package backend.backend.rest.workout.DTO;
 
 public class WarmUpSectionDTO extends BaseSectionDTO {
     private Long id;
-    private float duration;
+    private String duration;
     private boolean isDurationWarmUp;
 
     public Long getId() {
@@ -13,14 +13,18 @@ public class WarmUpSectionDTO extends BaseSectionDTO {
         this.id = id;
     }
 
-    public float getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
     public boolean isDurationWarmUp() {
         return isDurationWarmUp;
+    }
+
+    public void setDurationWarmUp(boolean durationWarmUp) {
+        this.isDurationWarmUp = durationWarmUp;
     }
 }
