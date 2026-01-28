@@ -1,5 +1,6 @@
 package backend.backend.rest.exercise.business;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,9 +52,16 @@ public class ExerciseService {
     public Exercise updateExerciseForCurrentUser(Exercise exercise) {
         String username = userService.getCurrentUsername();
         User user = userService.findByUsername(username);
+        ExerciseEntity existingEntity = exerciseRepository
+                .findByIdAndUserUsername(exercise.getId(), username)
+                .orElse(null);
+        if (existingEntity == null) {
+            return null;
+        }
 
-        ExerciseEntity entity = mapper.businessToPersistence(exercise, user);
-        ExerciseEntity saved = exerciseRepository.save(entity);
+        ExerciseEntity newData = mapper.businessToPersistence(exercise, user);
+        existingEntity = updateEntity(existingEntity, newData);
+        ExerciseEntity saved = exerciseRepository.save(existingEntity);
         return entityToBiz.entityToBusiness(saved);
     }
 
@@ -62,5 +70,14 @@ public class ExerciseService {
         exerciseRepository.findById(id)
                 .filter(e -> e.getUser() != null && e.getUser().getUsername().equals(username))
                 .ifPresent(exerciseRepository::delete);
+    }
+
+    private ExerciseEntity updateEntity(ExerciseEntity toUpdate, ExerciseEntity newData) {
+        toUpdate.setName(newData.getName());
+        toUpdate.setWeight(newData.getWeight());
+        toUpdate.setRepetitions(newData.getRepetitions());
+        toUpdate.setMuscles(newData.getMuscles());
+        toUpdate.setUpdatedAt(Instant.now());
+        return toUpdate;
     }
 }

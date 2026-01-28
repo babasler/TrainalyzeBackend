@@ -31,7 +31,7 @@ public class ExerciseController {
     private ExerciseService exerciseService;
 
     private static final Logger logger = LoggerFactory.getLogger(ExerciseController.class);
-
+    
     @GetMapping()
     public ExerciseView[] getExercises() {
         logger.info("Fetching exercises for current user");
@@ -63,8 +63,7 @@ public class ExerciseController {
     @PutMapping("/{id}")
     public ExerciseView updateExercise(@RequestBody ExerciseUpdateRequest request) {
         ExerciseUpdateRequestToExerciseMapper toBiz = new ExerciseUpdateRequestToExerciseMapper();
-        Exercise ex = toBiz.dtoToBusiness(request);
-        //Hier muss das richtige Entity geholt und geupdated werden.
+        Exercise ex = toBiz.dtoToBusiness(request);        
         logger.info("Updating exercise id {}: {}, {}, {}", ex.getId(), ex.getName(), ex.getWeight(), ex.getRepetitions());
         Exercise updated = exerciseService.updateExerciseForCurrentUser(ex);
         ExerciseToExerciseViewMapper toView = new ExerciseToExerciseViewMapper();
