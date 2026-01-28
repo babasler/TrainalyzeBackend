@@ -9,8 +9,8 @@ public class ExerciseEntityToExerciseMapper {
         exercise.setId(entity.getId());
         exercise.setName(entity.getName());
         exercise.setMuscles(entity.getMuscles());
-        exercise.setWeight(entity.getWeight());
-        exercise.setRepetitions(entity.getRepetitions());
+        exercise.setMaxWeight(entity.getWeight());
+        exercise.setMaxRepetitions(entity.getRepetitions());
         return exercise;
     }
 }

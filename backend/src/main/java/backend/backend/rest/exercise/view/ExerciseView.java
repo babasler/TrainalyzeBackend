@@ -10,7 +10,7 @@ import lombok.Setter;
 public class ExerciseView {
     private Long id;
     private String name;
-    private float weight;
-    private int repetitions;
+    private float maxWeight;
+    private int maxRepetitions;
     private String[] muscleGroups;
 }

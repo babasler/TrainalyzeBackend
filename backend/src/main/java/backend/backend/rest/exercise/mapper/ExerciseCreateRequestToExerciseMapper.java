@@ -8,8 +8,8 @@ public class ExerciseCreateRequestToExerciseMapper {
         Exercise exercise = new Exercise();
         exercise.setName(request.getName());
         exercise.setMuscles(request.getMuscleGroups());
-        exercise.setWeight(request.getWeight());
-        exercise.setRepetitions(request.getRepetitions());
+        exercise.setMaxWeight(request.getWeight());
+        exercise.setMaxRepetitions(request.getRepetitions());
         return exercise;
     }
 }

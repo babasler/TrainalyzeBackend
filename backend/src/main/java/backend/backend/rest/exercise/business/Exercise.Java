@@ -9,6 +9,6 @@ public class Exercise {
     private Long id;
     private String name;
     private String[] muscles;
-    private float weight;
-    private int repetitions;
+    private float maxWeight;
+    private int maxRepetitions;
 }

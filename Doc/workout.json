@@ -1,0 +1,102 @@
+{
+    "workout" : {
+        "id": 1,
+        "name": "Full Body Workout",
+        "sections" : [
+            {
+                "sectiontype": "Warmup",
+                "isDurationBased": true,
+                "durationMinutes": 10,
+                "durationSeconds": 0
+            },
+            {
+                "sectiontype" :"Training",
+                "exercises": [
+                    {
+                        "id": 101,
+                        "name": "Squats",
+                        "maxWeight": 100.0,
+                        "maxRepetitions": 8,
+                        "muscleGroups": ["Legs", "Glutes"],
+                        "numberOfSets": 3,
+                        "sets": [
+                            {
+                                "setNumber": 1,
+                                "weight": 100.0,
+                                "repetitions": 8,
+                                "pause" : {
+                                    "isDurationBased": true,
+                                    "durationSeconds": 60
+                                }
+                            },
+                            {
+                                "setNumber": 2,
+                                "weight": 100.0,
+                                "repetitions": 8,
+                                "pause" : {
+                                    "isDurationBased": false,
+                                    "durationSeconds": 0
+                                }
+                            },
+                            {
+                                "setNumber": 3,
+                                "weight": 100.0,
+                                "repetitions": 8,
+                                "pause" : {
+                                    "isDurationBased": true,
+                                    "durationSeconds": 90
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": 102,
+                        "name": "Bench Press",
+                        "maxWeight": 80.0,
+                        "maxRepetitions": 8,
+                        "muscleGroups": ["Chest", "Triceps"],
+                        "numberOfSets": 1,
+                        "sets": [
+                            {
+                                "setNumber": 1,
+                                "weight": 80.0,
+                                "repetitions": 8,
+                                "pause" : {
+                                    "isDurationBased": true,
+                                    "durationSeconds": 120
+                                }
+                            }
+                        ]
+                    },
+                    {
+                    "superset": {
+                            "exercises" : [
+                                {
+                                    "numberOfSets": 2,
+                                    "firstExercise": {
+                                        "id": 103,
+                                        "name": "Pull-Ups",
+                                        "maxWeight": 0.0,
+                                        "maxRepetitions": 10,
+                                        "muscleGroups": ["Back", "Biceps"]
+                                        },
+                                    "secondExercise": {
+                                        "id": 104,
+                                        "name": "Dips",
+                                        "maxWeight": 0.0,
+                                        "maxRepetitions": 10,
+                                        "muscleGroups": ["Chest", "Triceps"]
+                                        },
+                                    "pause" : {
+                                    "isDurationBased": true,
+                                    "durationSeconds": 120
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

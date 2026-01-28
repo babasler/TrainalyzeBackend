@@ -8,8 +8,8 @@ public class ExerciseToExerciseViewMapper {
         ExerciseView view = new ExerciseView();
         view.setId(exercise.getId());
         view.setName(exercise.getName());
-        view.setWeight(exercise.getWeight());
-        view.setRepetitions(exercise.getRepetitions());
+        view.setMaxWeight(exercise.getMaxWeight());
+        view.setMaxRepetitions(exercise.getMaxRepetitions());
         view.setMuscleGroups(exercise.getMuscles());
         return view;
     }

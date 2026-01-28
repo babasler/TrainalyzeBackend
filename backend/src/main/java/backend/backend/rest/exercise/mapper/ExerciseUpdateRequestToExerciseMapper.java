@@ -9,8 +9,8 @@ public class ExerciseUpdateRequestToExerciseMapper {
         exercise.setId(request.getId());
         exercise.setName(request.getNewName());
         exercise.setMuscles(request.getNewMuscleGroups());
-        exercise.setWeight(request.getNewWeight());
-        exercise.setRepetitions(request.getNewRepetitions());
+        exercise.setMaxWeight(request.getNewWeight());
+        exercise.setMaxRepetitions(request.getNewRepetitions());
         return exercise;
     }
 }

@@ -9,8 +9,8 @@ public class ExerciseToExerciseEntityMapper {
         ExerciseEntity entity = ExerciseEntity.of(
             exercise.getName(),
             exercise.getMuscles(),
-            exercise.getWeight(),
-            exercise.getRepetitions()
+            exercise.getMaxWeight(),
+            exercise.getMaxRepetitions()
         );
         entity.setUser(user);
         return entity;
