@@ -36,7 +36,11 @@ public class UserService {
 
      public String getCurrentUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UnauthorizedException("User is not authenticated");
+        }
+        // Check if principal is a String and equals "anonymousUser"
+        if (auth.getPrincipal() instanceof String && "anonymousUser".equals(auth.getPrincipal())) {
             throw new UnauthorizedException("User is not authenticated");
         }
         return auth.getName();
