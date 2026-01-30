@@ -50,11 +50,29 @@ public class ExerciseService {
 
     public Exercise updateExerciseForCurrentUser(Exercise exercise) {
         String username = userService.getCurrentUsername();
-        User user = userService.findByUsername(username);
 
-        ExerciseEntity entity = mapper.businessToPersistence(exercise, user);
-        ExerciseEntity saved = exerciseRepository.save(entity);
-        return entityToBiz.entityToBusiness(saved);
+        if (exercise == null || exercise.getId() == null) {
+            // Cannot update without a valid ID
+            return null;
+        }
+
+        return exerciseRepository.findById(exercise.getId())
+                .filter(existing -> existing.getUser() != null
+                        && existing.getUser().getUsername().equals(username))
+                .map(existing -> {
+                    // Reuse mapping logic to populate fields from the business object
+                    User user = existing.getUser();
+                    ExerciseEntity updated = mapper.businessToPersistence(exercise, user);
+
+                    // Preserve persistence-related fields and timestamps
+                    updated.setId(existing.getId());
+                    updated.setCreatedAt(existing.getCreatedAt());
+                    updated.touchUpdatedAt();
+
+                    ExerciseEntity saved = exerciseRepository.save(updated);
+                    return entityToBiz.entityToBusiness(saved);
+                })
+                .orElse(null);
     }
 
     public void deleteExerciseForCurrentUser(Long id) {
