@@ -44,8 +44,10 @@ public class ExerciseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExerciseView> getExerciseById(@PathVariable Long id) {
+        logger.info("Fetching exercise with id {} for current user", id);
         Exercise exercise = exerciseService.getExerciseByIdForCurrentUser(id);
         if (exercise == null) {
+            logger.warn("Exercise with id {} not found for current user", id);
             return ResponseEntity.notFound().build();
         }
         ExerciseToExerciseViewMapper toView = new ExerciseToExerciseViewMapper();
