@@ -27,7 +27,7 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-    logger.info("Login attempt for user: {}", request.getUsername() + " with pin: " + request.getPin());
+    logger.info("Login attempt for user: {}", request.getUsername());
     try {
       Authentication auth = authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPin()));
