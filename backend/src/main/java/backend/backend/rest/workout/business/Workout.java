@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkoutPlan {
+public class Workout {
     private Long id;
     private String name;
     private List<Section> sections;
