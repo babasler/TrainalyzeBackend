@@ -61,9 +61,12 @@ public class ExerciseController {
     }
 
     @PutMapping("/{id}")
-    public ExerciseView updateExercise(@RequestBody ExerciseUpdateRequest request) {
+    public ExerciseView updateExercise(@PathVariable Long id, @RequestBody ExerciseUpdateRequest request) {
         ExerciseUpdateRequestToExerciseMapper toBiz = new ExerciseUpdateRequestToExerciseMapper();
         Exercise ex = toBiz.dtoToBusiness(request);
+        if (ex.getId() != null && !id.equals(ex.getId())) {
+            throw new IllegalArgumentException("Path variable id does not match request body id.");
+        }
         //Hier muss das richtige Entity geholt und geupdated werden.
         logger.info("Updating exercise id {}: {}, {}, {}", ex.getId(), ex.getName(), ex.getWeight(), ex.getRepetitions());
         Exercise updated = exerciseService.updateExerciseForCurrentUser(ex);
