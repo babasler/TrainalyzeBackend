@@ -71,7 +71,7 @@ public class ExerciseController {
             throw new IllegalArgumentException("Path variable id does not match request body id.");
         }
         //Hier muss das richtige Entity geholt und geupdated werden.
-        logger.info("Updating exercise id {}: {}, {}, {}", ex.getId(), ex.getName(), ex.getWeight(), ex.getRepetitions());
+        logger.info("Updating exercise id {}: {}, {}, {}", ex.getId(), ex.getName(), ex.getMaxWeight(), ex.getMaxRepetitions());
         Exercise updated = exerciseService.updateExerciseForCurrentUser(ex);
         ExerciseToExerciseViewMapper toView = new ExerciseToExerciseViewMapper();
         return toView.businessToView(updated);

@@ -1,6 +1,5 @@
 package backend.backend.rest.exercise.business;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,12 +82,4 @@ public class ExerciseService {
                 .ifPresent(exerciseRepository::delete);
     }
 
-    private ExerciseEntity updateEntity(ExerciseEntity toUpdate, ExerciseEntity newData) {
-        toUpdate.setName(newData.getName());
-        toUpdate.setWeight(newData.getWeight());
-        toUpdate.setRepetitions(newData.getRepetitions());
-        toUpdate.setMuscles(newData.getMuscles());
-        toUpdate.setUpdatedAt(Instant.now());
-        return toUpdate;
-    }
 }
