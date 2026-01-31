@@ -1,5 +1,6 @@
 package backend.backend.rest.user;
 
+import backend.backend.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,6 +36,13 @@ public class UserService {
 
      public String getCurrentUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth != null ? auth.getName() : null;
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UnauthorizedException("User is not authenticated");
+        }
+        // Check if principal is a String and equals "anonymousUser"
+        if (auth.getPrincipal() instanceof String && "anonymousUser".equals(auth.getPrincipal())) {
+            throw new UnauthorizedException("User is not authenticated");
+        }
+        return auth.getName();
     }
 }
