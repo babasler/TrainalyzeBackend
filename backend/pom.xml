@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>training-recording-device-backend</artifactId>
+    <artifactId>trainalyze-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <parent>
