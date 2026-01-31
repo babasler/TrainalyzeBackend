@@ -1,6 +1,7 @@
 package backend.backend.rest.exercise.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +43,15 @@ public class ExerciseController {
     }
 
     @GetMapping("/{id}")
-    public ExerciseView getExerciseById(@PathVariable Long id) {
+    public ResponseEntity<ExerciseView> getExerciseById(@PathVariable Long id) {
+        logger.info("Fetching exercise with id {} for current user", id);
         Exercise exercise = exerciseService.getExerciseByIdForCurrentUser(id);
         if (exercise == null) {
-            return null;
+            logger.warn("Exercise with id {} not found for current user", id);
+            return ResponseEntity.notFound().build();
         }
         ExerciseToExerciseViewMapper toView = new ExerciseToExerciseViewMapper();
-        return toView.businessToView(exercise);
+        return ResponseEntity.ok(toView.businessToView(exercise));
     }
 
     @PostMapping("/create")
